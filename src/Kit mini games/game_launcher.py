@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from mini_games import game_2048, snake, tetris
+from mini_games import game_2048, snake, tetris, tic_tac_toe
 
 
 class GameLauncher:
@@ -12,6 +12,7 @@ class GameLauncher:
             ("2048", self.start_game_2048),
             ("Змейка", self.start_game_snake),
             ("Тетрис", self.start_game_tetris),
+            ("Крестики-нолики", self.start_game_tic_tac_toe),
         ]
 
         self.setup_ui()
@@ -35,3 +36,7 @@ class GameLauncher:
     def start_game_tetris(self):
         tetris.Tetris().start_game()
         print("Начинаем игру Тетрис....")
+
+    def start_game_tic_tac_toe(self):
+        tic_tac_toe.TicTacToe().start_game()
+        print("Начинаем игру Крестики-нолики....")
