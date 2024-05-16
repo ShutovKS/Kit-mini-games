@@ -1,0 +1,2 @@
+pygame~=2.5.2
+PyAutoGUI~=0.9.54
