@@ -1,5 +1,6 @@
-import mini_games.game_2048
 import tkinter as tk
+
+from mini_games import game_2048, snake
 
 
 class GameLauncher:
@@ -7,7 +8,10 @@ class GameLauncher:
         self.master = master
         master.title("Программа запуска игр")
 
-        self.game_list = [("2048", self.start_game_2048)]
+        self.game_list = [
+            ("2048", self.start_game_2048),
+            ("Змейка", self.start_game_snake),
+        ]
 
         self.setup_ui()
 
@@ -20,5 +24,9 @@ class GameLauncher:
             button.pack()
 
     def start_game_2048(self):
-        mini_games.game_2048.Game2048().start_game()
+        game_2048.Game2048().start_game()
         print("Начинаем игру 2048....")
+
+    def start_game_snake(self):
+        snake.SnakeGame().start_game()
+        print("Начинаем игру Змейка....")

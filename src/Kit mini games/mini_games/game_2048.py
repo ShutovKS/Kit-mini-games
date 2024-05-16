@@ -1,5 +1,4 @@
 import random
-import sys
 
 import pygame
 
@@ -129,5 +128,5 @@ class Game2048:
             if self.game.is_game_over():
                 print("Игра закончена!")
                 running = False
+
         pygame.quit()
-        sys.exit()
