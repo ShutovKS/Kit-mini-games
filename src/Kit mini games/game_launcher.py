@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from mini_games import game_2048, snake
+from mini_games import game_2048, snake, tetris
 
 
 class GameLauncher:
@@ -11,6 +11,7 @@ class GameLauncher:
         self.game_list = [
             ("2048", self.start_game_2048),
             ("Змейка", self.start_game_snake),
+            ("Тетрис", self.start_game_tetris),
         ]
 
         self.setup_ui()
@@ -30,3 +31,7 @@ class GameLauncher:
     def start_game_snake(self):
         snake.SnakeGame().start_game()
         print("Начинаем игру Змейка....")
+
+    def start_game_tetris(self):
+        tetris.Tetris().start_game()
+        print("Начинаем игру Тетрис....")
