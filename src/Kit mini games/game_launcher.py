@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from mini_games import game_2048, minesweeper, slot_machine, snake, tetris, tic_tac_toe
+from mini_games import game_2048, minesweeper, slot_machine, snake, sum_game, tetris, tic_tac_toe
 
 
 class GameLauncher:
@@ -13,6 +13,7 @@ class GameLauncher:
             ("Сапер", self.start_game_minesweeper),
             ("Слот-машина", self.start_game_slot_machine),
             ("Змейка", self.start_game_snake),
+            ("Сумма", self.start_game_sum_game),
             ("Тетрис", self.start_game_tetris),
             ("Крестики-нолики", self.start_game_tic_tac_toe),
         ]
@@ -42,6 +43,10 @@ class GameLauncher:
     def start_game_snake(self):
         snake.SnakeGame().start_game()
         print("Начинаем игру Змейка....")
+
+    def start_game_sum_game(self):
+        sum_game.SumGame().start_game()
+        print("Начинаем игру Сумма....")
 
     def start_game_tetris(self):
         tetris.Tetris().start_game()
