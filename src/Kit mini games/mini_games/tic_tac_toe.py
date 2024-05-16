@@ -1,5 +1,4 @@
 import random
-import sys
 
 import pygame
 
@@ -54,17 +53,17 @@ class TicTacToe:
             for col in range(self.board_cols):
                 if self.board[row][col] == 1:
                     pygame.draw.circle(self.screen, self.circle_color, (
-                    int(col * self.square_size + self.square_size // 2),
-                    int(row * self.square_size + self.square_size // 2)), self.circle_radius, self.circle_width)
+                        int(col * self.square_size + self.square_size // 2),
+                        int(row * self.square_size + self.square_size // 2)), self.circle_radius, self.circle_width)
                 elif self.board[row][col] == 2:
                     pygame.draw.line(self.screen, self.cross_color, (
-                    col * self.square_size + self.space, row * self.square_size + self.square_size - self.space), (
-                                     col * self.square_size + self.square_size - self.space,
-                                     row * self.square_size + self.space), self.cross_width)
+                        col * self.square_size + self.space, row * self.square_size + self.square_size - self.space), (
+                                         col * self.square_size + self.square_size - self.space,
+                                         row * self.square_size + self.space), self.cross_width)
                     pygame.draw.line(self.screen, self.cross_color,
                                      (col * self.square_size + self.space, row * self.square_size + self.space), (
-                                     col * self.square_size + self.square_size - self.space,
-                                     row * self.square_size + self.square_size - self.space), self.cross_width)
+                                         col * self.square_size + self.square_size - self.space,
+                                         row * self.square_size + self.square_size - self.space), self.cross_width)
 
     def mark_square(self, row, col, player):
         self.board[row][col] = player
@@ -118,7 +117,7 @@ class TicTacToe:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
+                    return
                 if event.type == pygame.MOUSEBUTTONDOWN and not self.game_over:
                     mouseX = event.pos[0]  # x
                     mouseY = event.pos[1]  # y
@@ -139,3 +138,5 @@ class TicTacToe:
                     if event.key == pygame.K_r:
                         self.restart()
             pygame.display.update()
+
+        pygame.quit()
