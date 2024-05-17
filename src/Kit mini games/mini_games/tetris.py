@@ -34,6 +34,7 @@ SHAPE_COLORS = [
 
 class Tetris:
     def __init__(self):
+        # Инициализация игры
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption('Tetris')
@@ -44,14 +45,17 @@ class Tetris:
         self.game_over = False
 
     def create_grid(self):
+        # Создание пустой сетки
         return [[(0, 0, 0) for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
 
     def get_new_piece(self):
+        # Получение нового тетромино
         shape = random.choice(SHAPES)
         color = SHAPE_COLORS[SHAPES.index(shape)]
         return {'shape': shape, 'color': color, 'x': GRID_WIDTH // 2 - len(shape[0]) // 2, 'y': 0}
 
     def draw_grid(self):
+        # Отрисовка сетки
         for y in range(GRID_HEIGHT):
             for x in range(GRID_WIDTH):
                 pygame.draw.rect(self.screen, self.grid[y][x],
@@ -60,6 +64,7 @@ class Tetris:
                                  (x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE), 1)
 
     def draw_piece(self, piece):
+        # Отрисовка текущего тетромино
         for y, row in enumerate(piece['shape']):
             for x, cell in enumerate(row):
                 if cell:
@@ -71,6 +76,7 @@ class Tetris:
                                       BLOCK_SIZE), 1)
 
     def valid_space(self, piece):
+        # Проверка, является ли положение тетромино допустимым
         for y, row in enumerate(piece['shape']):
             for x, cell in enumerate(row):
                 if cell:
@@ -81,6 +87,7 @@ class Tetris:
         return True
 
     def lock_piece(self, piece):
+        # Фиксация тетромино на сетке
         for y, row in enumerate(piece['shape']):
             for x, cell in enumerate(row):
                 if cell:
@@ -88,17 +95,20 @@ class Tetris:
         self.clear_rows()
 
     def clear_rows(self):
+        # Очистка заполненных рядов
         rows_to_clear = [y for y in range(GRID_HEIGHT) if all(self.grid[y][x] != (0, 0, 0) for x in range(GRID_WIDTH))]
         for y in rows_to_clear:
             del self.grid[y]
             self.grid.insert(0, [(0, 0, 0) for _ in range(GRID_WIDTH)])
 
     def rotate_piece(self, piece):
+        # Поворот тетромино
         piece['shape'] = [list(row) for row in zip(*piece['shape'][::-1])]
         if not self.valid_space(piece):
             piece['shape'] = [list(row) for row in zip(*piece['shape'])][::-1]
 
     def start_game(self):
+        # Запуск игрового цикла
         while not self.game_over:
             self.screen.fill((0, 0, 0))
             self.draw_grid()

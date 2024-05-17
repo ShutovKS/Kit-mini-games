@@ -5,6 +5,7 @@ import pygame
 
 class TicTacToe:
     def __init__(self):
+        # Инициализация игры
         pygame.init()
         self.size = 300
         self.line_width = 15
@@ -49,6 +50,7 @@ class TicTacToe:
                              (col * self.square_size, self.size), self.line_width)
 
     def draw_figures(self):
+        # Рисуем круги и крестики
         for row in range(self.board_rows):
             for col in range(self.board_cols):
                 if self.board[row][col] == 1:
@@ -66,12 +68,15 @@ class TicTacToe:
                                          row * self.square_size + self.square_size - self.space), self.cross_width)
 
     def mark_square(self, row, col, player):
+        # Помечаем ячейку на доске
         self.board[row][col] = player
 
     def available_square(self, row, col):
+        # Проверка, свободна ли ячейка
         return self.board[row][col] == 0
 
     def is_board_full(self):
+        # Проверка, заполнена ли доска
         for row in range(self.board_rows):
             for col in range(self.board_cols):
                 if self.board[row][col] == 0:
@@ -79,15 +84,15 @@ class TicTacToe:
         return True
 
     def check_win(self, player):
-        # Проверка по горизонтали
+        # Проверка победы по горизонтали
         for row in range(self.board_rows):
             if self.board[row][0] == player and self.board[row][1] == player and self.board[row][2] == player:
                 return True
-        # Проверка по вертикали
+        # Проверка победы по вертикали
         for col in range(self.board_cols):
             if self.board[0][col] == player and self.board[1][col] == player and self.board[2][col] == player:
                 return True
-        # Проверка по диагоналям
+        # Проверка победы по диагонали
         if self.board[0][0] == player and self.board[1][1] == player and self.board[2][2] == player:
             return True
         if self.board[0][2] == player and self.board[1][1] == player and self.board[2][0] == player:
@@ -95,6 +100,7 @@ class TicTacToe:
         return False
 
     def bot_move(self):
+        # Ход бота (случайное свободное место)
         empty_squares = [(row, col) for row in range(self.board_rows) for col in range(self.board_cols) if
                          self.board[row][col] == 0]
         if empty_squares:
@@ -105,6 +111,7 @@ class TicTacToe:
             self.player = 1
 
     def restart(self):
+        # Перезапуск игры
         self.board = [[0 for _ in range(self.board_cols)] for _ in range(self.board_rows)]
         self.player = 1
         self.game_over = False
@@ -113,6 +120,7 @@ class TicTacToe:
         self.draw_figures()
 
     def start_game(self):
+        # Запуск игрового цикла
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
