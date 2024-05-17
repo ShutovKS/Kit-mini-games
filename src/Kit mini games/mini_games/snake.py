@@ -11,6 +11,7 @@ RED = (255, 0, 0)
 
 class SnakeGame:
     def __init__(self, width=400, height=400):
+        # Инициализация параметров игры
         self.width = width
         self.height = height
         self.block_size = 10
@@ -35,17 +36,21 @@ class SnakeGame:
         self.spawn_food()
 
     def spawn_food(self):
+        # Размещение еды в случайном месте
         self.food = (random.randrange(0, self.width // self.block_size) * self.block_size,
                      random.randrange(0, self.height // self.block_size) * self.block_size)
 
     def draw_snake(self):
+        # Отрисовка змейки
         for segment in self.snake:
             pygame.draw.rect(self.display, GREEN, (segment[0], segment[1], self.block_size, self.block_size))
 
     def draw_food(self):
+        # Отрисовка еды
         pygame.draw.rect(self.display, RED, (self.food[0], self.food[1], self.block_size, self.block_size))
 
     def move_snake(self):
+        # Движение змейки
         head = self.snake[0]
         if self.direction == "UP":
             new_head = (head[0], head[1] - self.block_size)
@@ -64,6 +69,7 @@ class SnakeGame:
             self.snake.pop()
 
     def check_collision(self):
+        # Проверка на столкновения
         head = self.snake[0]
         if (head[0] < 0 or head[0] >= self.width or
                 head[1] < 0 or head[1] >= self.height or
@@ -71,6 +77,7 @@ class SnakeGame:
             self.game_over = True
 
     def handle_events(self):
+        # Обработка событий (управление змейкой)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.game_over = True
@@ -85,6 +92,7 @@ class SnakeGame:
                     self.direction = "RIGHT"
 
     def start_game(self):
+        # Запуск игрового цикла
         while not self.game_over:
             self.display.fill(BLACK)
             self.handle_events()

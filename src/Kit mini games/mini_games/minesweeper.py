@@ -5,6 +5,7 @@ import pygame
 
 class Minesweeper:
     def __init__(self):
+        # Инициализация параметров игры
         self.width = 10
         self.height = 10
         self.mines = 10
@@ -24,6 +25,7 @@ class Minesweeper:
         self.calculate_numbers()
 
     def place_mines(self):
+        # Размещение мин на поле
         mines_placed = 0
         while mines_placed < self.mines:
             x = random.randint(0, self.width - 1)
@@ -33,6 +35,7 @@ class Minesweeper:
                 mines_placed += 1
 
     def calculate_numbers(self):
+        # Подсчет чисел вокруг мин
         for y in range(self.height):
             for x in range(self.width):
                 if self.grid[y][x] == -1:
@@ -46,6 +49,7 @@ class Minesweeper:
                 self.grid[y][x] = count
 
     def reveal_cell(self, x, y):
+        # Открытие ячейки
         if self.grid[y][x] == -1:
             self.game_over = True
             return
@@ -57,6 +61,7 @@ class Minesweeper:
                         self.reveal_cell(x + dx, y + dy)
 
     def check_win(self):
+        # Проверка на выигрыш
         for y in range(self.height):
             for x in range(self.width):
                 if self.grid[y][x] != -1 and not self.revealed[y][x]:
@@ -65,6 +70,7 @@ class Minesweeper:
         return True
 
     def draw_grid(self):
+        # Отрисовка сетки игры
         for y in range(self.height):
             for x in range(self.width):
                 rect = pygame.Rect(x * (self.cell_size + self.margin) + self.margin,
@@ -85,6 +91,7 @@ class Minesweeper:
                         pygame.draw.rect(self.screen, (0, 255, 0), rect)
 
     def handle_event(self, event):
+        # Обработка событий (клик мышью)
         if event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
             grid_x = x // (self.cell_size + self.margin)
@@ -98,6 +105,7 @@ class Minesweeper:
                     self.flags[grid_y][grid_x] = not self.flags[grid_y][grid_x]
 
     def start_game(self):
+        # Запуск игры
         pygame.init()
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption("Minesweeper")

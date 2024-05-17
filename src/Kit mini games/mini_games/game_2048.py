@@ -3,8 +3,12 @@ import random
 import pygame
 
 
-class Game2048Logic:
+class Game2048:
     def __init__(self):
+        pygame.init()
+        pygame.display.set_caption('2048')
+
+        self.screen = pygame.display.set_mode((400, 400))
         self.size = 4  # Размер доски (4х4)
         self.board = [[0] * self.size for _ in range(self.size)]
         self.add_random_tile()
@@ -84,19 +88,12 @@ class Game2048Logic:
         # Игра окончена, если ходы невозможны
         return not self.can_move()
 
-
-class Game2048:
-    def __init__(self):
-        pygame.init()
-        self.game = Game2048Logic()
-        self.screen = pygame.display.set_mode((400, 400))
-        pygame.display.set_caption('2048')
-
     def draw_board(self):
+        # Отрисовка доски
         self.screen.fill((187, 173, 160))
-        for r in range(self.game.size):
-            for c in range(self.game.size):
-                value = self.game.board[r][c]
+        for r in range(self.size):
+            for c in range(self.size):
+                value = self.board[r][c]
                 if value == 0:
                     color = (205, 193, 180)
                 else:
@@ -110,6 +107,7 @@ class Game2048:
         pygame.display.flip()
 
     def start_game(self):
+        # Запуск игры
         running = True
         while running:
             self.draw_board()
@@ -118,14 +116,14 @@ class Game2048:
                     running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_w or event.key == pygame.K_UP:
-                        self.game.move_up()
+                        self.move_up()
                     elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        self.game.move_left()
+                        self.move_left()
                     elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                        self.game.move_down()
+                        self.move_down()
                     elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                        self.game.move_right()
-            if self.game.is_game_over():
+                        self.move_right()
+            if self.is_game_over():
                 print("Игра закончена!")
                 running = False
 

@@ -5,6 +5,7 @@ import pygame
 
 class SlotMachine:
     def __init__(self):
+        # Инициализация игрового автомата
         pygame.init()
         self.screen = pygame.display.set_mode((600, 600))
         pygame.display.set_caption("Slot Machine")
@@ -24,6 +25,7 @@ class SlotMachine:
         self.message = ""
 
     def start_game(self):
+        # Запуск игры
         self.running = True
         self.message = "Нажмите пробел, чтобы вращаться"
         self.spin()
@@ -40,6 +42,7 @@ class SlotMachine:
         pygame.quit()
 
     def spin(self):
+        # Вращение барабанов и определение результата
         self.result = [random.choice(self.symbols) for _ in range(3)]
         if self.result[0] == self.result[1] == self.result[2]:
             self.message = "Ты победил!"
@@ -47,6 +50,7 @@ class SlotMachine:
             self.message = "Попробуйте еще раз!"
 
     def draw(self):
+        # Отрисовка экрана
         self.screen.fill((0, 0, 0))
         for i, symbol in enumerate(self.result):
             color = self.colors[symbol]
@@ -56,6 +60,7 @@ class SlotMachine:
         self.screen.blit(message_text, (100, 400))
 
     def handle_event(self, event):
+        # Обработка событий (нажатие пробела)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and self.running:
                 self.spin()

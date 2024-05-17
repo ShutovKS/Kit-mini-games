@@ -5,6 +5,7 @@ import pygame
 
 class SumGame:
     def __init__(self):
+        # Инициализация игры
         pygame.init()
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("Sum Game")
@@ -13,6 +14,7 @@ class SumGame:
         self.running = True
 
     def start_game(self):
+        # Запуск игрового цикла
         num1, num2 = random.randint(0, 10), random.randint(0, 10)
         correct_answer = num1 + num2
         user_answer = ""
@@ -25,6 +27,7 @@ class SumGame:
                 if event.type == pygame.KEYDOWN:
                     if input_active:
                         if event.key == pygame.K_RETURN:
+                            # Проверка правильности ответа и генерация нового вопроса
                             if user_answer.isdigit() and int(user_answer) == correct_answer:
                                 print("Правильно!")
                             else:
@@ -39,6 +42,7 @@ class SumGame:
                     else:
                         input_active = True
 
+            # Отрисовка экрана
             self.screen.fill((255, 255, 255))
             question_text = self.font.render(f"{num1} + {num2} = ?", True, (0, 0, 0))
             self.screen.blit(question_text, (200, 150))
